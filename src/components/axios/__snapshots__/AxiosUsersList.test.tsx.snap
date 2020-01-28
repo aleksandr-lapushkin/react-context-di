@@ -8,7 +8,9 @@ exports[`Axios-backed UsersList Can fetch a list of users 1`] = `
     <div
       class="ant-list-header"
     >
-      Available Users
+      <h3>
+        Available Users
+      </h3>
     </div>
     <div
       class="ant-spin-nested-loading"
@@ -21,6 +23,7 @@ exports[`Axios-backed UsersList Can fetch a list of users 1`] = `
         >
           <li
             class="ant-list-item ant-list-item-no-flex"
+            style="cursor: pointer;"
             title="someone"
           >
             someone

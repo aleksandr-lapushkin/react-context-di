@@ -3,10 +3,8 @@ import axios from "axios";
 import {User, UserClient} from "../../clients/UserClient";
 import {render} from "@testing-library/react";
 import {StaticRouter} from "react-router";
-import {AxiosUsersList} from "../axios/AxiosUsersList";
 import React from "react";
 import {AxiosClientUsersList} from "./AxiosClientUsersList";
-import { mock, reset, instance, when } from "ts-mockito"
 import { usersClient } from "../../clients";
 
 jest.mock("../../clients", () => ({usersClient: {getUsers: jest.fn()}}))
@@ -16,7 +14,7 @@ describe("UsersClient-backed UsersList", () => {
 
     })
     it("Can fetch a list of users", async () => {
-        const users: User[] = [{id: "asd", name: "someone"}]
+        const users: User[] = [{id: "asd", name: "someone", fullName: "Some One"}]
         usersClient.getUsers = jest.fn().mockResolvedValue(users)
         const element = render(
             <StaticRouter>

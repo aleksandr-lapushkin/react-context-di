@@ -3,6 +3,7 @@ import { AxiosInstance } from "axios";
 export interface User {
     id: string
     name: string
+    fullName: string
 }
 
 export interface UserClient {

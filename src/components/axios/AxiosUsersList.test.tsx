@@ -12,8 +12,9 @@ describe("Axios-backed UsersList", () => {
         mock.reset()
     })
     it("Can fetch a list of users", async () => {
-        const users: User[] = [{id: "asd", name: "someone"}]
+        const users: User[] = [{id: "asd", name: "someone", fullName: "Some One"}]
         mock.onGet("/api/users").reply(200, {users: users})
+
         const element = render(
             <StaticRouter>
                 <AxiosUsersList />

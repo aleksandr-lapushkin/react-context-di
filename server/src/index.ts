@@ -5,7 +5,7 @@ const express = require('express')
 const app = express()
 const port = 4000
 
-const users = [new User("1", "bob"), new User("2", "john"), new User("3", "mike")]
+const users = [new User("1", "bob", "Bob Bobson"), new User("2", "john", "John Johnson"), new User("3", "mike", "Michael Michaelson"), new User("4", "cecil", 'Cecil Cecilson')]
 const byId = new Map(users.map(user => [user.id, user]))
 const userRatings = new Map(users.map(user => [user.id, (Math.random() * 100)]))
 

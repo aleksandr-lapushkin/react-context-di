@@ -3,7 +3,7 @@ import {AxiosRatingsClient, RatingsClient} from "./clients/RatingsClient";
 import axios from "axios";
 import React, {useContext} from "react";
 
-interface Clients {
+export interface Clients {
     usersClient: UserClient
     ratingsClient: RatingsClient
 }

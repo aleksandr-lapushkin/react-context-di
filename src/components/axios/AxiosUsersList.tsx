@@ -6,6 +6,7 @@ import {UsersList} from "../display/UsersList";
 export const AxiosUsersList: React.FC = () => {
     const [users, setUsers] = useState<User[]>()
     const [error, setError] = useState<string>()
+
     useEffect(() => {
         const loadData = async () => {
             try {

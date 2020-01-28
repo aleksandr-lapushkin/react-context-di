@@ -14,7 +14,7 @@ describe("Context-backed UsersList", () => {
         reset(usersClient)
     })
     it("Can fetch a list of users", async () => {
-        const users: User[] = [{id: "asd", name: "someone"}]
+        const users: User[] = [{id: "asd", name: "someone", fullName: "Some One"}]
         when(usersClient.getUsers()).thenResolve(users)
         const element = render(
             <StaticRouter>

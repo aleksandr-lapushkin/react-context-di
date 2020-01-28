@@ -7,17 +7,17 @@ import {MultiClientRating} from "../multi-client-context/MultiClientRating";
 
 interface UserCardProps {
     user?: User
+    titleRenderer: (user: User) => React.ReactNode
 }
 
-export const UserCard: React.FC<UserCardProps> = ({user}) => {
+export const UserCard: React.FC<UserCardProps> = ({user, titleRenderer}) => {
     if (user) {
         return (
-            <Card title={<div><MultiClientRating userId={user.id}><UserAvatar/></MultiClientRating>{` ${user.name}`}</div>}>
+            <Card title={<div>{titleRenderer(user)}</div>}>
                 <div>
                     <div>ID: {user.id}</div>
+                    <div>Full Name: {user.fullName}</div>
                 </div>
-
-
             </Card>
         )
     }

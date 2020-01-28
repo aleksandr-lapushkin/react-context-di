@@ -15,11 +15,12 @@ export const UsersList: React.FC<UsersListProps> = ({users, errorMessage}) => {
         return (
             <List
                 bordered={true}
-                header={"Available Users"}
+                header={<h3>Available Users</h3>}
                 renderItem={item =>
                     <List.Item
                         key={item.id}
                         title={item.name}
+                        style={{cursor: "pointer"}}
                         onClick={() => router.push(`/users/${item.id}`)}>
                         {item.name}
                     </List.Item>

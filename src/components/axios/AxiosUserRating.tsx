@@ -1,23 +1,23 @@
 import React, {PropsWithChildren, useEffect, useState} from "react";
-import {useClient} from "../../context-clients";
+import axios from "axios"
 import {UserRating} from "../display/UserRating";
 
-export interface MultiClientRatingProps {
+export interface AxiosUserRatingProps {
     userId: string
 }
 
-export const MultiClientRating: React.FC<PropsWithChildren<MultiClientRatingProps>> = ({userId, children}) => {
+export const AxiosUserRating: React.FC<PropsWithChildren<AxiosUserRatingProps>> = ({userId, children}) => {
     const [rating, setRating] = useState<number>()
     const [error, setError] = useState<string>()
 
-    const ratingsClient = useClient("ratingsClient")
     useEffect(() => {
         const loadRating = async () => {
             try {
-                const result = await ratingsClient.getRatingForUser(userId)
-                setRating(result)
+                const result = await axios.get<{rating: number}>(`/api/users/${userId}/rating`)
+
+                setRating(result.data.rating)
             } catch (err) {
-                setError(err.message)
+                setError(err.response.data.message)
             }
 
         }
@@ -25,5 +25,4 @@ export const MultiClientRating: React.FC<PropsWithChildren<MultiClientRatingProp
     })
 
     return <UserRating error={error} rating={rating}>{children}</UserRating>
-
 }
