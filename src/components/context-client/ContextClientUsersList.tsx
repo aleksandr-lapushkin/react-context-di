@@ -1,4 +1,4 @@
-import {useUsersClient} from "../../hooks/useClient";
+import {useUsersClient} from "../../hooks/useUsersClient";
 import React, {useEffect, useState} from "react";
 import {User} from "../../clients/UserClient";
 import {UsersList} from "../display/UsersList";

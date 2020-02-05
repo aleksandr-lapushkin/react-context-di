@@ -7,7 +7,7 @@ import {MultiClientUsersList} from "../multi-client-context/MultiClientUsersList
 export const Home: React.FC = () => {
     return (
         <div>
-            <AxiosUsersList/>
+            <MultiClientUsersList/>
         </div>
     );
 }

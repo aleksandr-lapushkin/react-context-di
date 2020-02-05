@@ -2,7 +2,7 @@ import {instance, mock, reset, when} from "ts-mockito";
 import {User, UserClient} from "../../clients/UserClient";
 import {render} from "@testing-library/react";
 import {StaticRouter} from "react-router";
-import {UsersClientContext} from "../../hooks/useClient";
+import {UsersClientContext} from "../../hooks/useUsersClient";
 import {ContextClientUsersList} from "../context-client/ContextClientUsersList";
 import React from "react";
 import { ClientsContext } from "../../context-clients";

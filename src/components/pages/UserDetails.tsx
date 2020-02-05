@@ -7,7 +7,7 @@ export const UserDetails: React.FC = () => {
     const {id} = useParams<{id: string}>();
     return (
         <div>
-            <AxiosUserCard id={id}/>
+            <MultiClientUserCard id={id}/>
         </div>
     );
 }

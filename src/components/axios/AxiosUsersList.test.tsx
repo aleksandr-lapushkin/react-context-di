@@ -5,15 +5,17 @@ import MockAdapter from "axios-mock-adapter"
 import axios from "axios"
 import {User} from "../../clients/UserClient";
 import {StaticRouter} from "react-router";
+import {ApiPaths} from "../../constants/ApiPaths";
 
 describe("Axios-backed UsersList", () => {
     const mock = new MockAdapter(axios);
     beforeEach(() => {
         mock.reset()
     })
+
     it("Can fetch a list of users", async () => {
         const users: User[] = [{id: "asd", name: "someone", fullName: "Some One"}]
-        mock.onGet("/api/users").reply(200, {users: users})
+        mock.onGet(ApiPaths.users.list).reply(200, {users: users})
 
         const element = render(
             <StaticRouter>
@@ -25,8 +27,9 @@ describe("Axios-backed UsersList", () => {
         expect(item).toBeInTheDocument()
         expect(element.container).toMatchSnapshot()
     })
+
     it("Can handle loading error", async () => {
-        mock.onGet("/api/users").reply(500, {message: "Something went wrong"})
+        mock.onGet(ApiPaths.users.list).reply(500, {message: "Something went wrong"})
 
         const element = render(
             <StaticRouter>
