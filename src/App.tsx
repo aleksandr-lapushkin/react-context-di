@@ -11,6 +11,7 @@ import {AxiosUserClient} from "./clients/UserClient";
 import axios from "axios"
 import {AxiosRatingsClient} from "./clients/RatingsClient";
 import { ClientsContext } from './context-clients';
+import {RatingsClientContext} from "./hooks/useRatingsClient";
 
 export const Container: React.FC<PropsWithChildren<{}>> = ({children}) =>
     <BrowserRouter>
@@ -52,7 +53,13 @@ export const SimpleContextExample: React.FC<PropsWithChildren<{}>> = ({children}
     <UsersClientContext.Provider
         value={{client: new AxiosUserClient(axios.create())}}
     >
-        {children}
+        <RatingsClientContext.Provider
+            value={{
+                client: new AxiosRatingsClient(axios.create())
+            }}
+        >
+            {children}
+        </RatingsClientContext.Provider>
     </UsersClientContext.Provider>
 
 
@@ -69,7 +76,7 @@ export const MultiContextExample: React.FC<PropsWithChildren<{}>> = ({children})
 function App() {
   return (
       <Container>
-          <SimpleContextExample>
+          {/*<SimpleContextExample>*/}
               <MultiContextExample>
                   <div>
                       <Switch>
@@ -82,7 +89,7 @@ function App() {
                       </Switch>
                   </div>
               </MultiContextExample>
-          </SimpleContextExample>
+          {/*</SimpleContextExample>*/}
       </Container>
   )
 }

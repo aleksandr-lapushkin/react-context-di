@@ -1,30 +1,32 @@
-import MockAdapter from "axios-mock-adapter";
-import axios from "axios";
 import {User} from "../../clients/UserClient";
 import {render} from "@testing-library/react";
-import {MemoryRouter, Route, StaticRouter, Switch} from "react-router";
 import React from "react";
-import {AxiosUserCard} from "./AxiosUserCard";
+import {AxiosClientUsersList} from "./AxiosClientUsersList";
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import {MemoryRouter, Route, StaticRouter, Switch} from "react-router";
 import {ApiPaths} from "../../constants/ApiPaths";
 import { message } from "antd";
 import {UiPaths} from "../../constants/UiPaths";
+import {AxiosClientUserCard} from "./AxiosClientUserCard";
+import { usersClient, ratingsClient } from "../../clients"
 
 const errorMessageSpy = jest.spyOn(message, "warning")
+jest.mock("../../clients")
 
-describe("Axios-backed UserCard", () => {
+describe("Axios-client-backed UserCard", () => {
     const mock = new MockAdapter(axios);
     beforeEach(() => {
         mock.reset()
     })
     it("Can show a User's details", async () => {
         const user: User = {id: "asd", name: "someone", fullName: "Some One"}
-
-        mock.onGet(ApiPaths.users.read("asd")).reply(200, user)
-        mock.onGet(ApiPaths.ratings.userRating("asd")).reply(200, {rating: 42})
+        usersClient.getUser = jest.fn().mockResolvedValue(user)
+        ratingsClient.getRatingForUser = jest.fn().mockResolvedValue(42)
 
         const element = render(
             <StaticRouter>
-                <AxiosUserCard id={"asd"} />
+                <AxiosClientUserCard id={"asd"} />
             </StaticRouter>
         )
 
@@ -36,13 +38,13 @@ describe("Axios-backed UserCard", () => {
     })
 
     it("Can handle a 404", async () => {
-        mock.onGet(ApiPaths.users.read("asd")).reply(404, {message: "Not Found"})
+        usersClient.getUser = jest.fn().mockRejectedValue(new Error("Not Found"))
 
         const element = render(
             <MemoryRouter initialEntries={["/test"]}>
                 <Switch>
                     <Route path={"/test"} exact>
-                        <AxiosUserCard id={"asd"} />
+                        <AxiosClientUserCard id={"asd"} />
                     </Route>
                     <Route path={UiPaths.root} exact>
                         <p>Not Found</p>
